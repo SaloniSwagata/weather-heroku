@@ -131,6 +131,37 @@ def find_min_max(place,unit,g_type):
         d=(obj.strftime("%d/%m"))
         st.write(f"### \v {d} :\t  ({max_t[i]} - {min_t[i]})")
         i+=1
+      
+    obs=mgr.weather_at_place(place)
+    weather=obs.weather
+    st.title(f"Details for {place} currently:")
+    st.write(f"### Sky : {weather.detailed_status}")
+    st.write(f"### Wind Speed : {weather.wind()['speed']} mph")
+    st.write(f"### Sunrise Time : {weather.sunrise_time(timeformat='iso')} GMT")
+    st.write(f"### Sunset Time : {weather.sunset_time(timeformat='iso')} GMT")
+    
+    
+    st.title("Expected Temperature Changes/Alerts:")
+    if forecaster.will_have_fog():
+        st.write("### FOG ALERT!!")
+    if forecaster.will_have_rain():
+        st.write("### RAINY SCENES!!")
+    if forecaster.will_have_storm():
+        st.write("### STORM ALERT!!")
+    if forecaster.will_have_snow():
+        st.write("### SNOW ALERT!!")
+    if forecaster.will_have_tornado():
+        st.write("### TORNADO ALER!!")
+    if forecaster.will_have_hurricane():
+        st.write("### HURRICANE ALERT")
+    if forecaster.will_have_clouds():
+        st.write("### CLOUDY SKIES")    
+    if forecaster.will_have_clear():
+        st.write("### CLEAR WEATHER PREDICTED!!")
+        
+if b:
+    if not place=="":    
+        find_min_max(place,unit,g_type)
           
     
     
